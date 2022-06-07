@@ -72,6 +72,7 @@ let increment = (id) =>{
 
     
     console.log(basket);
+    update(id);
 };
 let decrement = (id) =>{
     console.log(basket);
@@ -85,5 +86,9 @@ let decrement = (id) =>{
 
     
     console.log(basket);
+    update(id);
 };
-let update = () =>{};
+let update = (id) =>{
+    let search = basket.find((x)=>x.id === id);
+    document.getElementById(id).innerHTML = search.item;
+};
