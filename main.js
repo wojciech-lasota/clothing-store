@@ -5,28 +5,28 @@ console.log(basket);
 
 const inventoryList = [
   {
-    id: "1",
+    id: 1,
     name: "Casual Shirt",
     price: 45,
     desc: "Lorem ipsum dolor sit amet consectetur adipisicing.",
     img: "images/img-1.jpg",
   },
   {
-    id: "2",
+    id: 2,
     name: "Office Shirt",
     price: 100,
     desc: "Lorem ipsum dolor sit amet consectetur adipisicing.",
     img: "images/img-2.jpg",
   },
   {
-    id: "3",
+    id: 3,
     name: "T Shirt",
     price: 25,
     desc: "Lorem ipsum dolor sit amet consectetur adipisicing.",
     img: "images/img-3.jpg",
   },
   {
-    id: "4",
+    id: 4,
     name: "Mens Suit",
     price: 300,
     desc: "Lorem ipsum dolor sit amet consectetur adipisicing.",
@@ -37,7 +37,7 @@ const inventoryList = [
 const generateShop = () => {
   return (shop.innerHTML = inventoryList
     .map(({ id, name, price, desc, img }) => {
-      const search = basket.find(({ id: basketId }) => id == basketId) || [];
+      const search = basket.find(({ id: basketId }) => id === basketId) || [];
       console.log(search);
       return `
         <div id=product-id-${id} class="item">
@@ -111,3 +111,4 @@ const calculation = () => {
   const cartIcon = document.getElementById("cartAmount");
   cartIcon.innerHTML = basket.map((x) => x.amount).reduce((x, y) => x + y, 0);
 };
+calculation();
