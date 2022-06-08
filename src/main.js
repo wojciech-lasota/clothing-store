@@ -1,44 +1,13 @@
 const shop = document.getElementById("shop");
 //console.log(shop);
-const basket = JSON.parse(localStorage.getItem("data")) || [];
-console.log(basket);
-
-const inventoryList = [
-  {
-    id: 1,
-    name: "Casual Shirt",
-    price: 45,
-    desc: "Lorem ipsum dolor sit amet consectetur adipisicing.",
-    img: "images/img-1.jpg",
-  },
-  {
-    id: 2,
-    name: "Office Shirt",
-    price: 100,
-    desc: "Lorem ipsum dolor sit amet consectetur adipisicing.",
-    img: "images/img-2.jpg",
-  },
-  {
-    id: 3,
-    name: "T Shirt",
-    price: 25,
-    desc: "Lorem ipsum dolor sit amet consectetur adipisicing.",
-    img: "images/img-3.jpg",
-  },
-  {
-    id: 4,
-    name: "Mens Suit",
-    price: 300,
-    desc: "Lorem ipsum dolor sit amet consectetur adipisicing.",
-    img: "images/img-4.jpg",
-  },
-];
+let basket = JSON.parse(localStorage.getItem("data")) || [];
+// console.log(basket);
 
 const generateShop = () => {
   return (shop.innerHTML = inventoryList
     .map(({ id, name, price, desc, img }) => {
       const search = basket.find(({ id: basketId }) => id === basketId) || [];
-      console.log(search);
+      // console.log(search);
       return `
         <div id=product-id-${id} class="item">
                 <img width ="220" src="${img}" alt="">
@@ -78,29 +47,30 @@ const increment = (id) => {
     search.amount++;
   }
 
-  localStorage.setItem("data", JSON.stringify(basket));
   // console.log(basket);
   update(id);
+  localStorage.setItem("data", JSON.stringify(basket));
 };
 const decrement = (id) => {
   const search = basket.find((x) => x.id === id);
-  if (search.amount === 0) {
-    return;
-  } else {
+  if (search === undefined) return;
+  else if (search.amount === 0) return;
+  else {
     search.amount--;
   }
+  update(id);
+  basket = basket.filter((basketItem) => basketItem.amount !== 0);
+  // console.log(basket);
 
   localStorage.setItem("data", JSON.stringify(basket));
-  // console.log(basket);
-  update(id);
 };
-const updateCartAmount = () => {
-  const cartAmount = document.getElementById("cartAmount");
-  cartAmount.innerHTML = basket.reduce(
-    (itemsAmount, { amount }) => itemsAmount + amount,
-    0
-  );
-};
+// const updateCartAmount = () => {
+//   const cartAmount = document.getElementById("cartAmount");
+//   cartAmount.innerHTML = basket.reduce(
+//     (itemsAmount, { amount }) => itemsAmount + amount,
+//     0
+//   );
+// };
 const update = (id) => {
   const search = basket.find((x) => x.id === id);
   document.getElementById(id).innerHTML = search.amount;
