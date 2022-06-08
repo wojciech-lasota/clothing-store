@@ -1,7 +1,7 @@
 let label = document.getElementById("label");
 // console.log(label);
 let shoppingCart = document.getElementById("shoping-card");
-console.log(shoppingCart);
+// console.log(shoppingCart);
 
 let basket = JSON.parse(localStorage.getItem("data")) || [];
 
@@ -30,7 +30,7 @@ const generateCartItems = () => {
                 <p>${search.name}</p>
                 <p class="card-item-price">$ ${search.price}</p>
               </h4>
-              <i class="bi bi-x-lg"></i>
+              <i onclick="removeItem(${id})" class="bi bi-x-lg"></i>
             </div>
 
             <div class="buttons display-f">
@@ -72,8 +72,8 @@ const increment = (id) => {
   }
 
   // console.log(basket);
-  update(id);
   generateCartItems();
+  update(id);
   localStorage.setItem("data", JSON.stringify(basket));
 };
 const decrement = (id) => {
@@ -93,4 +93,44 @@ const update = (id) => {
   const search = basket.find((x) => x.id === id);
   document.getElementById(id).innerHTML = search.amount;
   calculation();
+  TotalAmount();
 };
+const removeItem = (itemToRemoveId) => {
+  const selectedItem = itemToRemoveId;
+  basket = basket.filter((basketItem) => basketItem.id != selectedItem);
+  generateCartItems();
+  TotalAmount();
+  calculation();
+  localStorage.setItem("data", JSON.stringify(basket));
+  // console.log(selectedItem);
+};
+const TotalAmount = () => {
+  if (basket.length !== 0) {
+    const amount = basket
+      .map((basketItem) => {
+        let { id, amount } = basketItem;
+        let search =
+          inventoryList.find(
+            (inventoryListItem) => inventoryListItem.id == id
+          ) || [];
+
+        return amount * search.price;
+      })
+      .reduce((previusNumber, nextNumber) => previusNumber + nextNumber, 0);
+    // console.log(amount);
+    label.innerHTML = `
+    <h2>Total Bill : $ ${amount}</h2>
+    <button class="checkout">Checkout</button>
+    <button onclick="clearCard()" class="removeAll">Clear all</button>
+    `;
+  } else return;
+};
+
+const clearCard = () => {
+  basket = [];
+  generateCartItems();
+  localStorage.setItem("data", JSON.stringify(basket));
+  calculation();
+};
+
+TotalAmount();

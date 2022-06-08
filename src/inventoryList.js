@@ -27,4 +27,32 @@ const inventoryList = [
     desc: "Lorem ipsum dolor sit amet consectetur adipisicing.",
     img: "images/img-4.jpg",
   },
+  {
+    id: 5,
+    name: "Black cap",
+    price: 50,
+    desc: "Lorem ipsum dolor sit amet consectetur adipisicing.",
+    img: "images/img-5.jpg",
+  },
+  {
+    id: 5,
+    name: "Mens shorts",
+    price: 80,
+    desc: "Lorem ipsum dolor sit amet consectetur adipisicing.",
+    img: "images/img-6.jpg",
+  },
+  {
+    id: 7,
+    name: "Mens shoes",
+    price: 150,
+    desc: "Lorem ipsum dolor sit amet consectetur adipisicing.",
+    img: "images/img-7.jpg",
+  },
+  {
+    id: 8,
+    name: "Mens belt",
+    price: 99,
+    desc: "Lorem ipsum dolor sit amet consectetur adipisicing.",
+    img: "images/img-8.jpg",
+  },
 ];

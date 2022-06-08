@@ -101,7 +101,9 @@ style rules for label and buttons
   text-align: center;
   margin-bottom: 20px;
 }
-.HomeBtn {
+.HomeBtn,
+.checkout,
+.removeAll {
   background-color: #212529;
   color: white;
   border: none;
@@ -109,6 +111,12 @@ style rules for label and buttons
   border-radius: 3px;
   cursor: pointer;
   margin-top: 10px;
+}
+.checkout {
+  background-color: green;
+}
+.removeAll {
+  background-color: red;
 }
 .bi-x-lg {
   color: red;
